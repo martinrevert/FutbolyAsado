@@ -1,4 +1,6 @@
-laravel-facebook-login
-======================
+Futbol y Asado pa' lo pibe
+==========================
 
-A complete application with Facebook login and a tutorial
+A complete soccer+barbacue application with Facebook login, team inscription, food calculations, etc.
+
+Licencia MIT (de puro caradura nomás)

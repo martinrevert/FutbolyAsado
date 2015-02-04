@@ -17,6 +17,7 @@ class Actividad extends Eloquent
     {
         $juegan = DB::table('actividades')
             ->whereIn('actividad', array('juega', 'comeyjuega'))
+            ->where( 'fecha', '=', Maindate::getMainDate()->fecha)
             ->get();
         $cuenta = 0;
         foreach ($juegan as $juega) {
@@ -26,10 +27,14 @@ class Actividad extends Eloquent
         return $cuenta;
     }
 
+    /**
+     * @return int
+     */
     public static function CuantosComen()
     {
         $comen = DB::table('actividades')
             ->whereIn('actividad', array('come', 'comeyjuega'))
+            ->where( 'fecha', '=', Maindate::getMainDate()->fecha)
             ->get();
         $cuenta = 0;
 
@@ -41,9 +46,10 @@ class Actividad extends Eloquent
     }
     public static function Lista()
     {
-        $actividades = DB::select('select users.photo,users.name,fecha, actividades.actividad, actividades.updated_at FROM actividades
+        $actividades = DB::select('SELECT users.photo,users.name, actividades.fecha, actividades.actividad, actividades.updated_at FROM actividades
+INNER JOIN maindate ON actividades.fecha = maindate.fecha
 LEFT JOIN profiles ON profiles.uid = actividades.actividad_uid
-LEFT JOIN users ON profiles.user_id = users.id');
+LEFT JOIN users ON profiles.user_id = users.id;');
       //  $user = $actividad->uid
       //  $profile = Profile::whereUid($user)->first()
     return $actividades;

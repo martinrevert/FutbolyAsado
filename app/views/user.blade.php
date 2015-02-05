@@ -6,9 +6,8 @@
 
        @if (!Actividad::Check($uid, Maindate::getMainDate()->fecha))
         <div class="jumbotron">
-            <h3>{{ \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', Maindate::getMainDate()->fecha)) }}
-                the match</h3>
-            <br>
+
+
 
             <p class="text-center">
                 <a class="btn btn-lg btn-primary btn-block" href="{{url('action/comeyjuega')}}">Juego y como

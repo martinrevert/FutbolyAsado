@@ -2,10 +2,8 @@
 
 @section('content')
 
-
     <div class="jumbotron">
-        <h4>Partido del dia {{ date("l d/m/Y",strtotime ($fecha->fecha)) }}:</h4>
-        <hr>
+
         @if(Actividad::CuantosJuegan() >= 16)
             <h5>Juegan {{ Actividad::CuantosJuegan() }}, o sea, hay partidazo !!!</h5>
             @if(Actividad::CuantosJuegan() >= 14 && Actividad::CuantosJuegan() < 16)
@@ -22,6 +20,7 @@
                 <h5>Comen {{ Actividad::CuantosComen() }}, hacen falta {{ (Actividad::CuantosComen()*0.5) }} kilos de
                     carne, {{ (Actividad::CuantosComen()*0.200)}} kilos de pan y ensalada a gusto.</h5>
             @endif
+         @endif
     </div>
 
     <table class="table table-striped table-hover">
@@ -42,8 +41,6 @@
             </tr>
 
             @endforeach
-
             </tbody>
-
-
+    </table>
 @stop

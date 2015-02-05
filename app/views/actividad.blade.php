@@ -18,7 +18,7 @@
                 <h5>Nadie tiene hambre todavía.</h5>
             @else
                 <h5>Comen {{ Actividad::CuantosComen() }}, hacen falta {{ (Actividad::CuantosComen()*0.5) }} kilos de
-                    carne, {{ (Actividad::CuantosComen()*0.200)}} kilos de pan y ensalada a gusto.</h5>
+                    carne, {{ (Actividad::CuantosComen()*0.125)}} kilos de pan y ensalada a gusto.</h5>
             @endif
          @endif
     </div>
@@ -36,7 +36,7 @@
             <tr>
                 <td><img class="media-object" src="{{$actividad->photo }}" alt="Profile image"></td>
                 <td>{{ $actividad->name }}</td>
-                <td>{{ $actividad->updated_at }}</td>
+                <td>{{ date("d/m/Y H:i:s",strtotime ($actividad->updated_at)) }}</td>
                 <td>{{ $actividad->actividad }}</td>
             </tr>
 

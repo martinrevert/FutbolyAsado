@@ -22,14 +22,6 @@ Route::get('/', function()
     return View::make('user', array('data'=>$data, 'uid' => $uid));
 });
 
-Route::get('/actionconfirmed', function()
-{
-    $data = array();
-    if (Auth::check()) {
-        $data = Auth::user();
-    }
-    return Redirect::to('/')->with('message', 'Confirmado (agregar actividad aquí)');
-});
 
 Route::get('/actividad', function()
 {
@@ -50,7 +42,18 @@ Route::get('/compras', function()
     }
     $facebook = new Facebook(Config::get('facebook'));
     $uid = $facebook->getUser();
-    return View::make('user', array('data'=>$data, 'uid' => $uid));
+    return View::make('compras', array('data'=>$data, 'uid' => $uid));
+});
+
+Route::get('/perfil', function()
+{
+    $data = array();
+    if (Auth::check()) {
+        $data = Auth::user();
+    }
+    $facebook = new Facebook(Config::get('facebook'));
+    $uid = $facebook->getUser();
+    return View::make('perfil', array('data'=>$data, 'uid' => $uid));
 });
 
 Route::get('/action/{kind}', function($kind)
@@ -86,22 +89,25 @@ Route::get('login/fb', function() {
 
 Route::get('login/fb/callback', function() {
     $code = Input::get('code');
-    if (strlen($code) == 0) return Redirect::to('/')->with('message', 'There was an error communicating with Facebook');
+    if (strlen($code) == 0) return Redirect::to('/')->with('message', 'No pudimos conectar con Facebook, por favor, reintentá mas tarde');
     
     $facebook = new Facebook(Config::get('facebook'));
     $uid = $facebook->getUser();
      
-    if ($uid == 0) return Redirect::to('/')->with('message', 'There was an error');
+    if ($uid == 0) return Redirect::to('/')->with('message', 'Error, hubo un problema con tu usuario de Facebook');
      
     $me = $facebook->api('/me');
+    if (empty($me['username']) || empty ($me['email'])) return Redirect::to('/')->with('message', 'Tu perfil de Facebook está incompleto, completalo y volvé a intentar.');
 
-	$profile = Profile::whereUid($uid)->first();
+    $profile = Profile::whereUid($uid)->first();
     if (empty($profile)) {
 
     	$user = new User;
     	$user->name = $me['first_name'].' '.$me['last_name'];
-    	$user->email = $me['email'];
-    	$user->photo = 'https://graph.facebook.com/'.$me['username'].'/picture?type=square';
+
+        $user->email = $me['email'];
+
+        $user->photo = 'https://graph.facebook.com/'.$me['username'].'/picture?type=square';
 
         if(!empty($me['birthday'])) {
             $user->birthday = $me['birthday'];

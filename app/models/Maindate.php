@@ -10,6 +10,12 @@ class Maindate extends Eloquent {
 		$fecha = Maindate::find(1);
 		return $fecha;
 	}
+
+    public static function getDateOnly()
+    {
+        $fecha = substr (Maindate::getMainDate()->fecha,0,10);
+        return $fecha;
+    }
 	
 	
 }

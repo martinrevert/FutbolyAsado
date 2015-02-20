@@ -135,3 +135,8 @@ Route::get('logout', function() {
     Auth::logout();
     return Redirect::to('/');
 });
+
+Route::get('/maindate', function() {
+    $date = Maindate::getDateOnly();
+    return Response::json(array("fecha" => $date))->setCallback(Input::get('callback'));
+});

@@ -57,7 +57,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="font-family: MiFont;font-size:150%;color:blue;" href="http://www.futbolyasado.com"><i
+            <a class="navbar-brand" style="font-family: MiFont;font-size:150%;color:blue;"
+               href="http://www.futbolyasado.com"><i
                         class="fa fa-home"></i>Fútbol y Asado</a>
         </div>
 
@@ -70,7 +71,8 @@
                     </li>
 
                     <li>
-                        <a href="{{url('/compras')}}" style="font-size: 150%"><i class="fa fa-cart-plus"></i> ¿Quién compra?</a>
+                        <a href="{{url('/compras')}}" style="font-size: 150%"><i class="fa fa-cart-plus"></i> ¿Quién
+                            compra?</a>
                     </li>
 
                 </ul>
@@ -79,7 +81,8 @@
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-expanded="false" style="font-size: 150%"><i class="fa fa-user"></i> {{{ $data['name'] }}}<span
+                           aria-expanded="false" style="font-size: 150%"><i
+                                    class="fa fa-user"></i> {{{ $data['name'] }}}<span
                                     class="caret"></span></a>
 
                         <ul class="dropdown-menu">
@@ -91,7 +94,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li ><img style="" src="{{ $data['photo']}}" alt="Profile image">
+                    <li><img style="" src="{{ $data['photo']}}" alt="Profile image">
                     </li>
 
                 </ul>
@@ -139,7 +142,7 @@
                 <p id="cloudcover" class="text-center"></p>
             </div>
 
-            @if((strval(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', Maindate::getMainDate()->fecha)->diffInDays())) >= 4 )
+            @if((strval(\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', Maindate::getMainDate()->fecha)->diffInDays())) <= 4 )
                 <div class="col-md-3">
                     <h6>Pronóstico noche {{ date("d/m/Y",strtotime (Maindate::getMainDate()->fecha)) }}</h6>
 

@@ -41,6 +41,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.2/html5shiv.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.2.0/respond.js"></script>
     <![endif]-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/datedropper.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/datedropper.css">
 </head>
 
 <body>
@@ -74,6 +79,10 @@
                         <a href="{{url('/compras')}}" style="font-size: 150%"><i class="fa fa-cart-plus"></i> ¿Quién
                             compra?</a>
                     </li>
+                    @if($data['name'] == 'Martin Revert')
+                        <li><a href="{{url('/admin')}}" style="font-size: 150%"><i class="fa fa-wrench"></i>
+                                Administrador</a></li>
+                    @endif
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -174,10 +183,7 @@
 </div>
 <!-- /container -->
 
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<script src="/js/weather.js"></script>
+<script>$("#maindate").dateDropper({format:"Y-m-d"});</script>
 
 </body>
 </html>

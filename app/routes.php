@@ -22,6 +22,26 @@ Route::get('/', function()
     return View::make('user', array('data'=>$data, 'uid' => $uid));
 });
 
+Route::get('/admin', function()
+{
+    $data = array();
+    if (Auth::check()) {
+        $data = Auth::user();
+    }
+    $facebook = new Facebook(Config::get('facebook'));
+    $uid = $facebook->getUser();
+    return View::make('admin', array('data'=>$data, 'uid' => $uid));
+});
+
+Route::post('/fecha', function()
+{
+    $maindate = Maindate::getMainDate();
+    $maindate->fecha = Input::get('maindate').' 22:00:00';
+    $maindate->save();
+
+    return Redirect::to('/admin')->with('message', 'Fecha cambiada con éxito.');
+
+});
 
 Route::get('/actividad', function()
 {

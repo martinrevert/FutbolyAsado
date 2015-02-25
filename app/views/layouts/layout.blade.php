@@ -62,9 +62,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" style="font-family: MiFont;font-size:150%;color:blue;"
+            <a class="navbar-brand" style="font-family: MiFont;font-size:120%;"
                href="http://www.futbolyasado.com"><i
-                        class="fa fa-home"></i>Fútbol y Asado</a>
+                        class="fa fa-home"></i>Fútbol<i class="fa fa-futbol-o"></i> y Asado<i class="fa fa-cutlery"></i></a>
         </div>
 
         @if(Auth::check())

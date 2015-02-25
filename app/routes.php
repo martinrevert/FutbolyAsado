@@ -36,10 +36,27 @@ Route::get('/admin', function()
 Route::post('/fecha', function()
 {
     $maindate = Maindate::getMainDate();
-    $maindate->fecha = Input::get('maindate').' 22:00:00';
-    $maindate->save();
+   // $newmain = Input::get('maindate');
+    $newmain = Input::all();
+    $rules = array(
+        'maindate' => 'date'
+    );
 
-    return Redirect::to('/admin')->with('message', 'Fecha cambiada con éxito.');
+    $validator = Validator::make($newmain, $rules);
+
+    if ($validator->passes()) {
+
+        $maindate->fecha = Input::get('maindate').' 22:00:00';
+        $maindate->save();
+        return Redirect::to('/admin')->with('message', 'Fecha cambiada con éxito.');
+    }
+
+    // Collect the validation error messages object.
+    $errors = $validator->messages();
+
+    return Redirect::to('/admin')->with('message', 'Fecha vacía!!!');
+
+
 
 });
 
